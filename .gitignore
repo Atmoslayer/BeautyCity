@@ -1,0 +1,14 @@
+# virtual environments
+venv
+env
+.venv
+
+# sensitive data
+.env
+**/*.sqlite3
+
+# IDE
+**/__pycache__
+.vscode
+/.idea
+/media
