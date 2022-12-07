@@ -1,5 +1,11 @@
 from django.contrib import admin
+from django.contrib.admin import ModelAdmin, TabularInline
 from .models import Service, ServiceCategory,Client, Employee,Appointment,Salon
+
+
+
+class AppointmentInline(TabularInline):
+    model = Appointment
 
 
 @admin.register(Service)
@@ -19,7 +25,8 @@ class ClientAdmin(admin.ModelAdmin):
 
 @admin.register(Employee)
 class EmployeeAdmin(admin.ModelAdmin):
-    pass
+    inlines = [AppointmentInline,]
+
 
 
 @admin.register(Salon)

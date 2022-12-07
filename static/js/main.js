@@ -308,7 +308,7 @@ $(document).ready(function() {
 						  	<div class="accordion__block_prof">Визажист</div>
 						  </div>
 			`)
-			
+
 		}
 
 		$(this).parent().parent().find('> button.active').addClass('selected').text(thisName + '  ' +thisAddress)

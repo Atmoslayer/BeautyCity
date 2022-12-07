@@ -47,9 +47,9 @@ class Service(models.Model):
 class Employee(models.Model):
     first_name = models.CharField('Имя', max_length = 100)
     last_name = models.CharField('Фамилия', max_length = 100)
-    date_of_birth = models.DateField('Дата рождения', db_index=True,null=True, blank=True)
+    date_of_birth = models.DateField('Дата рождения', db_index=True, null=True, blank=True)
     salon = models.ForeignKey(Salon, on_delete=models.CASCADE, related_name='employees',verbose_name='Салон')
-    avatar = models.ImageField(upload_to='photos/%Y/%m/%d', null=True,blank=True)
+    avatar = models.ImageField(upload_to='photos/%Y/%m/%d', null=True, blank=True)
     service_category = models.ForeignKey(ServiceCategory,
                                          on_delete=models.CASCADE,
                                          related_name='employees',

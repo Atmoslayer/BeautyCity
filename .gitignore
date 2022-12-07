@@ -5,7 +5,7 @@ env
 beautyenv
 # sensitive data
 .env
-**/*.sqlite3
+
 
 # IDE
 **/__pycache__
