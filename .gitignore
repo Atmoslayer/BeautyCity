@@ -2,7 +2,7 @@
 venv
 env
 .venv
-
+beautyenv
 # sensitive data
 .env
 **/*.sqlite3
