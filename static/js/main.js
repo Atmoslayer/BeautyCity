@@ -381,7 +381,8 @@ $(document).ready(function() {
 	//popup
 	$('.header__block_auth').click(function(e) {
 		e.preventDefault()
-		$('#authModal').arcticmodal();
+		console.log($(this).parent().parent().parent().parent().parent().parent().parent().find('> #authModal.box-modal.AuthPopup.popup'))
+		$('.authPopup').arcticmodal();
 		// $('#confirmModal').arcticmodal();
 
 	})
