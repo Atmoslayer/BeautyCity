@@ -343,10 +343,15 @@ $(document).ready(function() {
 	// }
 
 
-	$(document).on('click', '.service__masters .accordion__block', function(e) {
-		let clone = $(this).clone()
-		console.log(clone)
-		$(this).parent().parent().find('> button.active').html(clone)
+	$(document).on('click', '.service__masters .accordion__block_item', function(e) {
+		//let clone = $(this).clone()
+		// console.log(clone)
+		thisEmployer = $(this).find('> .accordion__block_item_intro').text()
+		$(this).parent().parent().parent().find('> button.active').addClass('selected').text(thisEmployer)
+		// $(this).parent().parent().find('> button.active').html(clone)
+		setTimeout(() => {
+			$(this).parent().parent().parent().find('> button.active').click()
+		}, 200)
 	})
 
 	// $('.accordion__block_item').click(function(e) {

@@ -32,8 +32,8 @@
 							<div class="panel">
 								{% for salon in salons %}
 							  <div class="accordion__block fic">
-								<div class="accordion__block_intro">{{salon.title}}</div>
-								<div class="accordion__block_address">{{salon.address}}</div>
+								<div class="accordion__block_intro">11 {{salon.title}}</div>
+								<div class="accordion__block_address">11 {{salon.address}}</div>
 							  </div>
 								{% endfor %}
 							</div>
@@ -59,7 +59,13 @@
 						<div class="service__form_block service__masters">
 							<button class="accordion">(Выберете мастера)</button>
 							<div class="panel">
-
+								<div class="accordion__block_items">
+									{% for employee in employers %}
+									<div class="accordion__block_item fic">
+										<div class="accordion__block_item_intro">{{employee.first_name}} {{employee.last_name}}</div>
+									</div>
+									{% endfor %}
+								</div>
 							</div>
 
 
