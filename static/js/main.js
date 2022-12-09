@@ -310,7 +310,7 @@ $(document).ready(function() {
 			`)
 
 		}
-
+		document.getElementById('salon').text = thisName + thisAddress
 		$(this).parent().parent().find('> button.active').addClass('selected').text(thisName + '  ' +thisAddress)
 		setTimeout(() => {
 			$(this).parent().parent().find('> button.active').click()
@@ -324,11 +324,13 @@ $(document).ready(function() {
 	})
 
 
-	$('.accordion__block_item').click(function(e) {
-		let thisName,thisAddress;
-		thisName = $(this).find('> .accordion__block_item_intro').text()
-		thisAddress = $(this).find('> .accordion__block_item_address').text()
-		$(this).parent().parent().parent().parent().find('> button.active').addClass('selected').text(thisName + '  ' +thisAddress)
+	$(document).on('click', '.service__services .accordion__block_item', function(e) {
+		console.log('service')
+		thisService = $(this).find('> .accordion__block_item_intro').text()
+		thisPrice = $(this).find('> .accordion__block_item_address').text()
+		document.getElementById('service_name').text = thisService
+		document.getElementById('service_price').text = thisPrice
+		$(this).parent().parent().parent().parent().find('> button.active').addClass('selected').text(thisService+ '  ' +thisPrice)
 		// $(this).parent().parent().parent().parent().find('> button.active').click()
 		// $(this).parent().parent().parent().addClass('hide')
 		setTimeout(() => {
@@ -340,19 +342,30 @@ $(document).ready(function() {
 
 	// 	console.log($('.service__masters > .panel').attr('data-masters'))
 	// if($('.service__salons .accordion.selected').text() === "BeautyCity Пушкинская  ул. Пушкинская, д. 78А") {
-	// }
+	// }e
 
 
 	$(document).on('click', '.service__masters .accordion__block_item', function(e) {
 		//let clone = $(this).clone()
 		// console.log(clone)
+		console.log('master')
 		thisEmployer = $(this).find('> .accordion__block_item_intro').text()
+		document.getElementById('serviceman').text = thisEmployer
 		$(this).parent().parent().parent().find('> button.active').addClass('selected').text(thisEmployer)
 		// $(this).parent().parent().find('> button.active').html(clone)
 		setTimeout(() => {
 			$(this).parent().parent().parent().find('> button.active').click()
 		}, 200)
 	})
+
+	$(document).on('click', '.time__btns_next', function(e) {
+		alert(
+			  document.getElementById('salon').text + '\n' +
+			  document.getElementById('serviceman').text + '\n' +
+			  document.getElementById('service_name').text + '\n' +
+			  document.getElementById('service_price').text + '\n')
+	})
+
 
 	// $('.accordion__block_item').click(function(e) {
 	// 	const thisName = $(this).find('.accordion__block_item_intro').text()
