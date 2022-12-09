@@ -91,6 +91,12 @@ class Appointment(models.Model):
         return f"{self.visit_time} - {self.client}"
 
 
+class Shedule(models.Model):
+    start_time = models.TimeField(verbose_name='Начало приема')
+    end_time = models.TimeField(verbose_name='Конец приема')
+
+    def __str__(self):
+        return f"{self.start_time} - {self.end_time}"
 
 
 

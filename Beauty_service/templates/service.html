@@ -55,7 +55,10 @@
 								{% endfor %}
 							</div>
 						</div>
-						<div class="service__form_block service__masters">
+
+
+
+													<div class="service__form_block service__masters">
 							<button class="accordion">(Выберете мастера)</button>
 							<div class="panel">
 								<div class="accordion__block_items">
@@ -71,6 +74,9 @@
 
 						</div>
 
+
+
+						</div>
 					</form>
 				</div>
 			</div>
@@ -87,12 +93,14 @@
 							<div class="col-md-8">
 								<div class="time__elems">
 									<div class="time__items">
-										<div class="time__elems_intro">Утро</div>
+										<div class="time__elems_intro">Выберете доступное время вашего мастера</div>
 										<div class="time__elems_elem fic">
-											<button data-time="10:00" class="time__elems_btn">10:00</button>
-											<button data-time="10:30" class="time__elems_btn">10:30</button>
+											{%  for hour in hours%}
+											<button data-time="10:00" class="time__elems_btn">{{hour}}</button>
+											{% endfor %}
 										</div>
 									</div>
+									{% comment %}
 									<div class="time__items">
 										<div class="time__elems_intro">День</div>
 										<div class="time__elems_elem fic">
@@ -110,6 +118,7 @@
 											<button data-time="19:00" class="time__elems_btn">19:00</button>
 										</div>
 									</div>
+									{% endcomment %}
 								</div>
 							</div>
 						</div>

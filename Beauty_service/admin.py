@@ -1,7 +1,11 @@
 from django.contrib import admin
 from django.contrib.admin import ModelAdmin, TabularInline
-from .models import Service, ServiceCategory,Client, Employee,Appointment,Salon
+from .models import Service, ServiceCategory, Client, Employee,Appointment,Salon,Shedule
 
+
+@admin.register(Shedule)
+class SheduleAdmin(admin.ModelAdmin):
+    pass
 
 
 class AppointmentInline(TabularInline):
