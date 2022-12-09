@@ -16,3 +16,7 @@ def service(request):
                'employers': employers,
               }
     return render(request, 'service.html', context=context)
+
+
+def account(request):
+    return render(request, 'notes.html', context={})
