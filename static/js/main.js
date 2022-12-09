@@ -125,7 +125,7 @@ $(document).ready(function() {
 		$('#mobMenu').hide()
 	})
 
-	new AirDatepicker('#datepickerHere')
+	let dp = new AirDatepicker('#datepickerHere')
 
 	var acc = document.getElementsByClassName("accordion");
 	var i;
@@ -203,7 +203,6 @@ $(document).ready(function() {
 			`)
 			// $('.service__masters div[data-masters="Pushkinskaya"]').addClass('vib')
 		}
-		console.log(thisName)
 		if(thisName === 'BeautyCity Ленина') {
 			
 			$('.service__masters > .panel').html(`
@@ -325,7 +324,6 @@ $(document).ready(function() {
 
 
 	$(document).on('click', '.service__services .accordion__block_item', function(e) {
-		console.log('service')
 		thisService = $(this).find('> .accordion__block_item_intro').text()
 		thisPrice = $(this).find('> .accordion__block_item_address').text()
 		document.getElementById('service_name').text = thisService
@@ -348,7 +346,6 @@ $(document).ready(function() {
 	$(document).on('click', '.service__masters .accordion__block_item', function(e) {
 		//let clone = $(this).clone()
 		// console.log(clone)
-		console.log('master')
 		thisEmployer = $(this).find('> .accordion__block_item_intro').text()
 		document.getElementById('serviceman').text = thisEmployer
 		$(this).parent().parent().parent().find('> button.active').addClass('selected').text(thisEmployer)
@@ -363,7 +360,9 @@ $(document).ready(function() {
 			  document.getElementById('salon').text + '\n' +
 			  document.getElementById('serviceman').text + '\n' +
 			  document.getElementById('service_name').text + '\n' +
-			  document.getElementById('service_price').text + '\n')
+			  document.getElementById('service_price').text + '\n' +
+			  dp.selectedDates + '\n' +
+			  document.getElementById('service_time').text)
 	})
 
 
@@ -423,6 +422,7 @@ $(document).ready(function() {
 		e.preventDefault()
 		$('.time__elems_btn').removeClass('active')
 		$(this).addClass('active')
+		document.getElementById('service_time').text = $(this).text()
 		// $(this).hasClass('active') ? $(this).removeClass('active') : $(this).addClass('active')
 	})
 
