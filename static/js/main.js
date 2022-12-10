@@ -125,7 +125,11 @@ $(document).ready(function() {
 		$('#mobMenu').hide()
 	})
 
-	let dp = new AirDatepicker('#datepickerHere')
+	let dp = new AirDatepicker('#datepickerHere', {
+		onSelect({date, formattedDate, datepicker}) {
+			sessionStorage.setItem("appointment_date", formattedDate);
+		}
+	}) 
 
 	var acc = document.getElementsByClassName("accordion");
 	var i;
@@ -141,7 +145,6 @@ $(document).ready(function() {
 	    	 panel.addClass('active')
 	  });
 	}
-
 
 	$(document).on('click', '.accordion__block', function(e) {
 		let thisName,thisAddress;
@@ -355,17 +358,6 @@ $(document).ready(function() {
 		}, 200)
 	})
 
-	$(document).on('click', '.time__btns_next', function(e) {
-		alert(
-			  sessionStorage.getItem('salon') + '\n' +
-			  sessionStorage.getItem('serviceman') + '\n' +
-			  sessionStorage.getItem('service_name') + '\n' +
-			  sessionStorage.getItem('service_price') + '\n' +
-			  dp.selectedDates + '\n' +
-			  sessionStorage.getItem('service_time'))
-	})
-
-
 	// $('.accordion__block_item').click(function(e) {
 	// 	const thisName = $(this).find('.accordion__block_item_intro').text()
 	// 	const thisAddress = $(this).find('.accordion__block_item_address').text()
@@ -422,7 +414,7 @@ $(document).ready(function() {
 		e.preventDefault()
 		$('.time__elems_btn').removeClass('active')
 		$(this).addClass('active')
-		sessionStorage.setItem("service_time", $(this).text())
+		sessionStorage.setItem("appointment_time", $(this).text())
 		// $(this).hasClass('active') ? $(this).removeClass('active') : $(this).addClass('active')
 	})
 
@@ -431,7 +423,24 @@ $(document).ready(function() {
 			$('.time__btns_next').addClass('active')
 		}
 	})
-	
-
-
+})
+$(document).on('click', '.time__btns_next', function(e) {
+	let csrf = document.cookie.replace(/(?:(?:^|.*;\s*)csrftoken\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+	$.ajax({
+		type: "post",
+		url: "/api/appointment",
+		data: {
+			salon: sessionStorage.getItem('salon'),
+			serviceman: sessionStorage.getItem('serviceman'),
+			service_name: sessionStorage.getItem('service_name'),
+			service_price:  sessionStorage.getItem('service_price'),
+			appointment_date: sessionStorage.getItem('appointment_date'), 
+			appointment_time: sessionStorage.getItem('appointment_time'),
+			csrfmiddlewaretoken: csrf,
+		},
+		
+		success: function(response) {
+			console.log(response);
+		}
+	});
 })

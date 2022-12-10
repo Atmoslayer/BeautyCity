@@ -8,7 +8,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name='index'),
     path('service/', views.service, name='service'),
-    path('account/', views.account, name='notes')
+    path('account/', views.account, name='notes'),
+    path('api/appointment', views.appointment, name='appointment'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 
