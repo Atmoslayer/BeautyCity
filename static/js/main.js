@@ -162,7 +162,7 @@ $(document).ready(function() {
 				let parse_response = JSON.parse(response)
 				let master_block = ""
 				for (let key in parse_response) {
-					master_block = master_block + '<div class="accordion__block_item fic"><div class="accordion__block_item_intro">' + parse_response[key]['fields']['first_name'] + '</div></div>'
+					master_block = master_block + '<div class="accordion__block_item fic"><div class="accordion__block_item_intro">' + parse_response[key]['fields']['first_name'] +' '+ parse_response[key]['fields']['last_name']+ '</div></div>'
 				}
 				master_block = '<div class="accordion__block_items">' + master_block + '</div>'
 				$('.service__masters > .panel').html(master_block)
