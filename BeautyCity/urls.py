@@ -11,6 +11,7 @@ urlpatterns = [
     path('account/', views.account, name='notes'),
     path('authorization/', views.authorization, name='authorization'),
     path('api/appointment/', views.add_appointment, name='add_appointment'),
+    path('api/masters/', views.fetch_masters, name='fetch_masters')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 

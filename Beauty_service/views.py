@@ -1,3 +1,4 @@
+from django.core import serializers
 from django.shortcuts import render, HttpResponse
 from .models import Salon, ServiceCategory, Service, Employee, Shedule, Appointment, Client
 from datetime import datetime, date, time, timedelta
@@ -54,6 +55,13 @@ def add_appointment(request):
                                 client=client,
                                )
     return HttpResponse("OK")
+
+
+def fetch_masters(request):
+    salon = Salon.objects.filter(address=request.GET['salon']).first()
+    masters = Employee.objects.filter(salon=salon)
+    data = serializers.serialize("json", masters)
+    return HttpResponse(data)
 
 
 def authorization(request):

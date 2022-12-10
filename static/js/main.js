@@ -125,7 +125,7 @@ $(document).ready(function() {
 		$('#mobMenu').hide()
 	})
 
-	let dp = new AirDatepicker('#datepickerHere', {
+	new AirDatepicker('#datepickerHere', {
 		onSelect({date, formattedDate, datepicker}) {
 			sessionStorage.setItem("appointment_date", formattedDate);
 		}
@@ -152,7 +152,22 @@ $(document).ready(function() {
 		thisName = $(this).find('> .accordion__block_intro').text()
 		thisAddress = $(this).find('> .accordion__block_address').text()
 		
-		
+		$.ajax({
+			type: "get",
+			url: "/api/masters/",
+			data: {
+				salon: thisAddress
+			},
+			success: function(response) {
+				let parse_response = JSON.parse(response)
+				let master_block = ""
+				for (let key in parse_response) {
+					master_block = master_block + '<div class="accordion__block_item fic"><div class="accordion__block_item_intro">' + parse_response[key]['fields']['first_name'] + '</div></div>'
+				}
+				master_block = '<div class="accordion__block_items">' + master_block + '</div>'
+				$('.service__masters > .panel').html(master_block)
+			}
+		});
 		if(thisName === 'BeautyCity Пушкинская') {
 			$('.service__masters > .panel').html(`
 				<div class="accordion__block fic">
