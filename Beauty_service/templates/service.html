@@ -4,6 +4,12 @@
 	{% load static %}
 	{% block head %}
 		<title>Beauty City</title>
+		<script type="text/javascript">
+			function  clearStorage() {
+				sessionStorage.clear();
+			}
+			window.onload = clearStorage;
+			</script>
 	{% endblock %}
 </head>
 <body class="servicePage">
@@ -134,13 +140,6 @@
 				</div>
 			</div>
 		</section>
-		<div id="cart-wrap">
-			<div id="serviceman"></div>
-			<div id="salon"></div>
-			<div id="service_name"></div>
-			<div id="service_price"></div>
-			<div id="service_time"></div>
-		  </div>
 	{% endblock %}
 
 </body>

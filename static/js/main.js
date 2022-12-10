@@ -309,7 +309,7 @@ $(document).ready(function() {
 			`)
 
 		}
-		document.getElementById('salon').text = thisName + thisAddress
+		sessionStorage.setItem('salon', thisName + thisAddress)
 		$(this).parent().parent().find('> button.active').addClass('selected').text(thisName + '  ' +thisAddress)
 		setTimeout(() => {
 			$(this).parent().parent().find('> button.active').click()
@@ -326,8 +326,8 @@ $(document).ready(function() {
 	$(document).on('click', '.service__services .accordion__block_item', function(e) {
 		thisService = $(this).find('> .accordion__block_item_intro').text()
 		thisPrice = $(this).find('> .accordion__block_item_address').text()
-		document.getElementById('service_name').text = thisService
-		document.getElementById('service_price').text = thisPrice
+		sessionStorage.setItem('service_name', thisService)
+		sessionStorage.setItem('service_price', thisPrice)
 		$(this).parent().parent().parent().parent().find('> button.active').addClass('selected').text(thisService+ '  ' +thisPrice)
 		// $(this).parent().parent().parent().parent().find('> button.active').click()
 		// $(this).parent().parent().parent().addClass('hide')
@@ -347,7 +347,7 @@ $(document).ready(function() {
 		//let clone = $(this).clone()
 		// console.log(clone)
 		thisEmployer = $(this).find('> .accordion__block_item_intro').text()
-		document.getElementById('serviceman').text = thisEmployer
+		sessionStorage.setItem('serviceman', thisEmployer)
 		$(this).parent().parent().parent().find('> button.active').addClass('selected').text(thisEmployer)
 		// $(this).parent().parent().find('> button.active').html(clone)
 		setTimeout(() => {
@@ -357,12 +357,12 @@ $(document).ready(function() {
 
 	$(document).on('click', '.time__btns_next', function(e) {
 		alert(
-			  document.getElementById('salon').text + '\n' +
-			  document.getElementById('serviceman').text + '\n' +
-			  document.getElementById('service_name').text + '\n' +
-			  document.getElementById('service_price').text + '\n' +
+			  sessionStorage.getItem('salon') + '\n' +
+			  sessionStorage.getItem('serviceman') + '\n' +
+			  sessionStorage.getItem('service_name') + '\n' +
+			  sessionStorage.getItem('service_price') + '\n' +
 			  dp.selectedDates + '\n' +
-			  document.getElementById('service_time').text)
+			  sessionStorage.getItem('service_time'))
 	})
 
 
@@ -422,7 +422,7 @@ $(document).ready(function() {
 		e.preventDefault()
 		$('.time__elems_btn').removeClass('active')
 		$(this).addClass('active')
-		document.getElementById('service_time').text = $(this).text()
+		sessionStorage.setItem("service_time", $(this).text())
 		// $(this).hasClass('active') ? $(this).removeClass('active') : $(this).addClass('active')
 	})
 
