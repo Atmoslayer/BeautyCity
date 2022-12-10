@@ -1,6 +1,6 @@
 from django.shortcuts import render, HttpResponse
-from .models import Salon, ServiceCategory, Service,  Employee,Shedule
-from datetime import datetime, date, time,timedelta
+from .models import Salon, ServiceCategory, Service, Employee, Shedule, Appointment, Client
+from datetime import datetime, date, time, timedelta
 
 
 def index(request):
@@ -39,6 +39,18 @@ def account(request):
     return render(request, 'notes.html', context={})
 
 
-def appointment(request):
+def add_appointment(request):
     print(request.POST, request.FILES)
+    salon = Salon.objects.filter(address=request.POST['salon']).first()
+    first_name, last_name = request.POST['serviceman'].split(' ')
+    serviceman = Employee.objects.filter(last_name=last_name, first_name=first_name).first()
+    service = Service.objects.filter(title=request.POST['service_name']).first()
+    visit_time = datetime.strptime(request.POST['appointment_date'], "%d.%M.%Y")
+    client = Client.objects.first()
+    Appointment.objects.create(
+                                employee=serviceman,
+                                visit_time=visit_time,
+                                service=service,
+                                client=client,
+                               )
     return HttpResponse("OK")

@@ -312,7 +312,7 @@ $(document).ready(function() {
 			`)
 
 		}
-		sessionStorage.setItem('salon', thisName + thisAddress)
+		sessionStorage.setItem('salon', thisAddress)
 		$(this).parent().parent().find('> button.active').addClass('selected').text(thisName + '  ' +thisAddress)
 		setTimeout(() => {
 			$(this).parent().parent().find('> button.active').click()
@@ -428,7 +428,7 @@ $(document).on('click', '.time__btns_next', function(e) {
 	let csrf = document.cookie.replace(/(?:(?:^|.*;\s*)csrftoken\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 	$.ajax({
 		type: "post",
-		url: "/api/appointment",
+		url: "/api/appointment/",
 		data: {
 			salon: sessionStorage.getItem('salon'),
 			serviceman: sessionStorage.getItem('serviceman'),

@@ -9,7 +9,7 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('service/', views.service, name='service'),
     path('account/', views.account, name='notes'),
-    path('api/appointment', views.appointment, name='appointment'),
+    path('api/appointment/', views.add_appointment, name='add_appointment'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 
