@@ -133,8 +133,8 @@ height: 30px;
 }
 .header__block_auth__intro {
 	font-weight: 500;
-font-size: 12px;
-line-height: 127.52%;
+	font-size: 12px;
+	line-height: 127.52%;
 /* or 15px */
 
 
@@ -1067,9 +1067,9 @@ opacity: 0.3;
 
 .panel {
 	display: none;
-  !max-height: 0;
-  !overflow: hidden;
-  !transition: max-height 0.2s ease-out;
+  	!max-height: 0;
+  	!overflow: hidden;
+  	!transition: max-height 0.2s ease-out;
 }
 
 .panel.active {
@@ -2242,7 +2242,11 @@ color: #262626;
 	input, textarea {
 		max-width: 100%;
 	}
-	.header__block_auth__intro {display: none;}
+	.header__block_auth__intro {
+
+	}
+
+
 	.banner {
 	    padding-top: 48px;
 	    padding-bottom: 86px;

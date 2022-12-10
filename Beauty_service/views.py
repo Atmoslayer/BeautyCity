@@ -54,3 +54,7 @@ def add_appointment(request):
                                 client=client,
                                )
     return HttpResponse("OK")
+
+
+def authorization(request):
+    return render(request, 'authorization.html', context={})

@@ -384,12 +384,12 @@ $(document).ready(function() {
 
 	//popup
 	$('.header__block_auth').click(function(e) {
-		e.preventDefault()
-		console.log($(this).parent().parent().parent().parent().parent().parent().parent().find('> #authModal.box-modal.AuthPopup.popup'))
-		$('.authPopup').arcticmodal();
-		// $('#confirmModal').arcticmodal();
+	e.preventDefault()
+	window.location.href = '/authorization/';
+	//$('.authPopup').arcticmodal();
+	// $('#confirmModal').arcticmodal();
 
-	})
+})
 
 	$('.rewiewPopupOpen').click(function(e) {
 		e.preventDefault()
