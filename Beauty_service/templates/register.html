@@ -9,10 +9,15 @@
 
 <body>
 {% block content %}
-		<form method="post">
+		<form method="post" class="form">
 			{% csrf_token %}
-			{{ form.as_p }}
-			<button type="submit">Зарегистрироваться</button>
+			{% for form in form %}
+				<div class="form_group">
+					<p><label class="form-label" for="{{ form.id_for_label }}">{{ form.label }}: </label>{{ form }}</p>
+					<div class="form-error">{{ form.errors }}</div>
+				</div>
+			{% endfor %}
+			<button class="form_button" type="submit">Зарегистрироваться</button>
 		</form>
 
 	{% endblock %}

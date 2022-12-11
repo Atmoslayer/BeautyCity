@@ -10,16 +10,34 @@ class AuthUserForm(AuthenticationForm, forms.ModelForm):
         model = User
         fields = ('username', 'password')
 
+    username = forms.CharField(
+        label='Логин',
+        widget=forms.TextInput(attrs={"class": "form-input"})
+    )
+    password = forms.CharField(
+        label='Пароль', strip=False,
+        widget=forms.PasswordInput(attrs={"class": "form-input"})
+    )
+
 
 class RegisterUserForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ('username', 'password')
+        fields = ('username', 'password', 'email')
+    username = forms.CharField(
+        label='Логин',
+    )
+    password = forms.CharField(
+        label='Пароль',
+    )
+    email = forms.EmailField(
+        label='Почта',
+    )
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field in self.fields:
-            self.fields[field].widget.attrs['class'] = 'form-control'
+            self.fields[field].widget.attrs['class'] = 'form-input'
 
     def save(self, commit=True):
         user = super().save(commit=True)

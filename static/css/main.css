@@ -2477,3 +2477,73 @@ color: #262626;
 		padding-left: 20px
 	}
 }
+
+	.form_group {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		position: relative;
+		margin-bottom: 20px;
+	}
+
+	.form {
+		margin-top: 170px;
+		margin-bottom: 170px;
+		margin-left: auto;
+		margin-right: auto;
+		width: 300px;
+		padding: 30px;
+		border-radius: 10px;
+		box-shadow: 0 4px 16px #ccc;
+		font-family: sans-serif;
+		letter-spacing: 1px;
+
+	}
+
+	.form-input,
+	.form_button {
+		font-family: sans-serif;
+		letter-spacing: 1px;
+
+	}
+
+	form-label {
+		position: absolute;
+		top: 0;
+		z-index: -1;
+		color: #9e9e9e;
+		transition: 0.3s;
+	}
+
+	.no_acc {
+		margin-top: 30px;
+	}
+
+	.redirect_text {
+		color: #F6A912;
+	}
+
+	.form-input {
+		width: 250px;
+		padding-bottom: 10px;
+		border: none;
+		border-bottom: 1px solid #e0e0e0;
+		background-color: transparent;
+		outline: none;
+		transition: 0.3s;
+	}
+
+	.form_button {
+		padding: 10px 20px;
+		border: none;
+		border-radius: 5px;
+		color: #fff;
+		background-color: #fecd07;
+		outline: none;
+		transition: 0.2s;
+	}
+
+	.form_button:focus,
+	.form_button:hover {
+		background-color: #efc109;
+	}

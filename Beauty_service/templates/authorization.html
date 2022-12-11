@@ -9,13 +9,24 @@
 
 <body>
 	{% block content %}
-		<form method="post">
-			{% csrf_token %}
-			{{ form.as_p }}
-			<button type="submit">Войти</button>
-		</form>
+	<form method="post" class="form">
+		{% csrf_token %}
+
+		{% for form in form %}
+			<div class="form_group">
+				<p><label class="form-label" for="{{ form.id_for_label }}">{{ form.label }}: </label>{{ form }}</p>
+				<div class="form-error">{{ form.errors }}</div>
+			</div>
+		{% endfor %}
+
+
+		<button class="form_button" type="submit">Войти</button>
 		<div class="registration_redirect">
-			<a href="{% url 'register' %}">Нет аккаунта? Зарегистрируйтесь</a>
+			<p class="no_acc">Нет аккаунта? </p>
+			<a class="redirect_text" href="{% url 'register' %}">Зарегистрируйтесь</a>
 		</div>
+	</form>
+
+
 	{% endblock %}
 </body>
