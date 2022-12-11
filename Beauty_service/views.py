@@ -1,9 +1,18 @@
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth.models import User
+from django.contrib.auth.views import LoginView, LogoutView
 from django.core import serializers
 from django.shortcuts import render, HttpResponse
+from django.urls import reverse_lazy
+from django.views.generic import CreateView
+
 from .models import Salon, ServiceCategory, Service, Employee, Shedule, Appointment, Client
 from datetime import datetime, date, time, timedelta
 from rest_framework.decorators import api_view
 from rest_framework import status
+from .forms import AuthUserForm, RegisterUserForm
+
 
 def index(request):
     return render(request, 'index.html', context={})
@@ -91,3 +100,37 @@ def fetch_masters(request):
 
 def authorization(request):
     return render(request, 'authorization.html', context={})
+
+
+def register(request):
+    return render(request, 'register.html', context={})
+
+
+class RegisterUser(CreateView):
+    model = User
+    form_class = RegisterUserForm
+    template_name = 'register.html'
+    success_url = reverse_lazy('notes')
+    success_msg = 'Пользователь создан'
+
+    def form_valid(self, form):
+        form_valid = super().form_valid(form)
+        username = form.cleaned_data["username"]
+        password = form.cleaned_data["password"]
+        aut_user = authenticate(username=username, password=password)
+        login(self.request, aut_user)
+        return form_valid
+
+
+class LoginUser(LoginView):
+    form_class = AuthUserForm
+    template_name = 'authorization.html'
+
+    success_url = reverse_lazy('notes')
+
+    def get_success_url(self):
+        return self.success_url
+
+
+class LogoutUser(LogoutView):
+    next_page = reverse_lazy('authorization')
