@@ -50,6 +50,10 @@ def account(request):
     return render(request, 'notes.html', context={})
 
 
+def service_finally(request):
+    return render(request, 'serviceFinally.html', context={})
+
+
 @api_view(['POST'])
 def add_appointment(request):
     serialized_appointment = request.data
