@@ -8,14 +8,14 @@
 
 
 <body>
-	{% block content %}
+{% block content %}
 		<form method="post">
 			{% csrf_token %}
 			{{ form.as_p }}
-			<button type="submit">Войти</button>
+			<button type="submit">Зарегистрироваться</button>
 		</form>
-		<div class="registration_redirect">
-			<a href="{% url 'register' %}">Нет аккаунта? Зарегистрируйтесь</a>
-		</div>
+
 	{% endblock %}
+
+
 </body>
