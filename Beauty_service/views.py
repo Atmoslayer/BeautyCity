@@ -126,6 +126,12 @@ class RegisterUser(CreateView):
         aut_user = authenticate(username=username, password=password)
         print(aut_user.__dict__)
         login(self.request, aut_user)
+        new_client = Client.objects.get_or_create(
+            user_id=aut_user.id,
+            first_name=aut_user.first_name,
+            last_name=aut_user.last_name,
+        )
+        print(new_client)
         return form_valid
 
 
