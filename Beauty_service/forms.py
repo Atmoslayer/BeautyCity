@@ -23,16 +23,28 @@ class AuthUserForm(AuthenticationForm, forms.ModelForm):
 class RegisterUserForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ('username', 'password', 'email')
+        fields = ('username', 'password', 'first_name', 'last_name')
+
+    first_name = forms.CharField(
+        label='Имя'
+    )
+
+    last_name = forms.CharField(
+        label='Фамилия (Необязательно)',
+        required=False
+    )
+
     username = forms.CharField(
         label='Логин',
     )
     password = forms.CharField(
         label='Пароль',
     )
-    email = forms.EmailField(
-        label='Почта',
+
+    phone_number = forms.IntegerField(
+        label='Телефон',
     )
+
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

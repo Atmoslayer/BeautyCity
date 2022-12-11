@@ -130,6 +130,7 @@ class RegisterUser(CreateView):
             user_id=aut_user.id,
             first_name=aut_user.first_name,
             last_name=aut_user.last_name,
+            phone_number=form.cleaned_data['phone_number']
         )
         print(new_client)
         return form_valid
