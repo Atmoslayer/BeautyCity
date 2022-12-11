@@ -399,8 +399,12 @@ $(document).ready(function() {
 
 	//popup
 	$('.header__block_auth').click(function(e) {
-	e.preventDefault()
-	window.location.href = '/authorization/';
+		e.preventDefault()
+		if ($(this).find('> .header__block_auth__intro').text() == 'Войти') 
+			window.location.href = '/authorization/';
+		else
+			window.location.href = '/account/';
+	
 	//$('.authPopup').arcticmodal();
 	// $('#confirmModal').arcticmodal();
 
