@@ -58,7 +58,8 @@ def service_finally(request):
 def add_appointment(request):
     serialized_appointment = request.data
     try:
-        current_client = Client.objects.all().first()
+
+        current_client = Client.objects.filter(user_id=request.user.id).first()
         first_name, last_name = serialized_appointment['serviceman'].split(' ')
         serviceman = Employee.objects.filter(last_name=last_name, first_name=first_name).first()
         service = Service.objects.filter(title=serialized_appointment['service_name']).first()
@@ -69,6 +70,7 @@ def add_appointment(request):
             employee=serviceman,
             service=service,
         )
+        #print(new_appointment.__dict__)
         return HttpResponse(f"Записали вас на "
                             f"{serialized_appointment['appointment_date']}-{serialized_appointment['appointment_time']}")
     except Exception:
@@ -122,6 +124,7 @@ class RegisterUser(CreateView):
         username = form.cleaned_data["username"]
         password = form.cleaned_data["password"]
         aut_user = authenticate(username=username, password=password)
+        print(aut_user.__dict__)
         login(self.request, aut_user)
         return form_valid
 

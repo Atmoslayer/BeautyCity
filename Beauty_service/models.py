@@ -68,7 +68,7 @@ class Client(models.Model):
     first_name = models.CharField('Имя', max_length = 100)
     last_name = models.CharField('Фамилия', max_length = 100)
     date_of_birth = models.DateField('Дата рождения', db_index=True, null=True, blank=True)
-    phone_number = models.CharField('Телефонный номер', max_length=15)
+    phone_number = models.CharField('Телефонный номер', max_length=15, default='789123456789')
 
     class Meta:
         verbose_name = 'Клиент'
