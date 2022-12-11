@@ -78,7 +78,8 @@ class Client(models.Model):
 
 
 class Appointment(models.Model):
-    visit_time = models.DateTimeField(db_index=True, verbose_name='время посещения')
+    date_time = models.DateField(null=True,verbose_name='Дата посещения')
+    visit_time = models.TimeField(db_index=True, verbose_name='время посещения')
     client = models.ForeignKey(Client,on_delete=models.CASCADE, related_name='appointments',verbose_name='клиент')
     employee = models.ForeignKey(Employee,on_delete=models.CASCADE,related_name='appointments')
     service = models.ForeignKey(Service, on_delete=models.CASCADE, related_name='appointments',verbose_name='услуга')

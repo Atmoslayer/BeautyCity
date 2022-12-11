@@ -2,7 +2,8 @@ from django.core import serializers
 from django.shortcuts import render, HttpResponse
 from .models import Salon, ServiceCategory, Service, Employee, Shedule, Appointment, Client
 from datetime import datetime, date, time, timedelta
-
+from rest_framework.decorators import api_view
+from rest_framework import status
 
 def index(request):
     return render(request, 'index.html', context={})
@@ -40,21 +41,45 @@ def account(request):
     return render(request, 'notes.html', context={})
 
 
+@api_view(['POST'])
 def add_appointment(request):
-    print(request.POST, request.FILES)
-    salon = Salon.objects.filter(address=request.POST['salon']).first()
-    first_name, last_name = request.POST['serviceman'].split(' ')
+    serialized_appointment = request.data
+    current_client = Client.objects.all().first()
+    first_name, last_name = serialized_appointment['serviceman'].split(' ')
     serviceman = Employee.objects.filter(last_name=last_name, first_name=first_name).first()
-    service = Service.objects.filter(title=request.POST['service_name']).first()
-    visit_time = datetime.strptime(request.POST['appointment_date'], "%d.%M.%Y")
-    client = Client.objects.first()
-    Appointment.objects.create(
-                                employee=serviceman,
-                                visit_time=visit_time,
-                                service=service,
-                                client=client,
-                               )
-    return HttpResponse("OK")
+    service = Service.objects.filter(title=serialized_appointment['service_name']).first()
+    try:
+        new_appointment = Appointment.objects.create(
+            date_time=datetime.strptime(serialized_appointment['appointment_date'], "%d.%M.%Y"),
+            visit_time=serialized_appointment['appointment_time'],
+            client=current_client,
+            employee=serviceman,
+            service=service,
+        )
+        return HttpResponse(f"Записали вас на "
+                            f"{serialized_appointment['appointment_date']}-{serialized_appointment['appointment_time']}")
+    except Exception:
+        return HttpResponse('Что то пошло не так, запишитесь по телефону')
+
+
+
+# def add_appointment(request):
+#     print(request.POST, request.FILES)
+#     salon = Salon.objects.filter(address=request.POST['salon']).first()
+#     first_name, last_name = request.POST['serviceman'].split(' ')
+#     serviceman = Employee.objects.filter(last_name=last_name, first_name=first_name).first()
+#     service = Service.objects.filter(title=request.POST['service_name']).first()
+#     date_time = datetime.strptime(request.POST['appointment_date'], "%d.%M.%Y")
+#     visit_time = request.POST['appointment_time']
+#     client = Client.objects.first()
+#     Appointment.objects.create(
+#                                 date_time = date_time,
+#                                 employee=serviceman,
+#                                 visit_time=visit_time,
+#                                 service=service,
+#                                 client=client,
+#                                )
+#     return HttpResponse("OK")
 
 
 def fetch_masters(request):

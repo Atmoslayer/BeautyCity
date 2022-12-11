@@ -455,6 +455,7 @@ $(document).on('click', '.time__btns_next', function(e) {
 		},
 		
 		success: function(response) {
+		    alert(response);
 			console.log(response);
 		}
 	});
