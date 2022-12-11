@@ -44,11 +44,11 @@ def account(request):
 @api_view(['POST'])
 def add_appointment(request):
     serialized_appointment = request.data
-    current_client = Client.objects.all().first()
-    first_name, last_name = serialized_appointment['serviceman'].split(' ')
-    serviceman = Employee.objects.filter(last_name=last_name, first_name=first_name).first()
-    service = Service.objects.filter(title=serialized_appointment['service_name']).first()
     try:
+        current_client = Client.objects.all().first()
+        first_name, last_name = serialized_appointment['serviceman'].split(' ')
+        serviceman = Employee.objects.filter(last_name=last_name, first_name=first_name).first()
+        service = Service.objects.filter(title=serialized_appointment['service_name']).first()
         new_appointment = Appointment.objects.create(
             date_time=datetime.strptime(serialized_appointment['appointment_date'], "%d.%M.%Y"),
             visit_time=serialized_appointment['appointment_time'],
@@ -59,7 +59,7 @@ def add_appointment(request):
         return HttpResponse(f"Записали вас на "
                             f"{serialized_appointment['appointment_date']}-{serialized_appointment['appointment_time']}")
     except Exception:
-        return HttpResponse('Что то пошло не так, запишитесь по телефону')
+        return HttpResponse('Что то пошло не так, запишитесь по телефону', status=status.HTTP_204_NO_CONTENT)
 
 
 
