@@ -1,6 +1,6 @@
 from django.db import models
 from django.core.validators import MinValueValidator
-
+from django.contrib.auth.models import User
 
 class Salon(models.Model):
     title = models.CharField('название', max_length=100)
@@ -64,6 +64,7 @@ class Employee(models.Model):
 
 
 class Client(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE,related_name='client')
     first_name = models.CharField('Имя', max_length = 100)
     last_name = models.CharField('Фамилия', max_length = 100)
     date_of_birth = models.DateField('Дата рождения', db_index=True, null=True, blank=True)
