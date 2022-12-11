@@ -8,6 +8,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name='index'),
     path('service/', views.service, name='service'),
+    path('service_finally/', views.service_finally, name='service_finally'),
     path('account/', views.account, name='notes'),
     path('authorization/', views.LoginUser.as_view(), name='authorization'),
     path('register/', views.RegisterUser.as_view(), name='register'),
