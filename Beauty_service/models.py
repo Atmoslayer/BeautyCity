@@ -2,6 +2,7 @@ from django.db import models
 from django.core.validators import MinValueValidator
 from django.contrib.auth.models import User
 
+
 class Salon(models.Model):
     title = models.CharField('название', max_length=100)
     address = models.CharField('адрес', max_length=100)
@@ -69,6 +70,7 @@ class Client(models.Model):
     last_name = models.CharField('Фамилия', max_length = 100)
     date_of_birth = models.DateField('Дата рождения', db_index=True, null=True, blank=True)
     phone_number = models.CharField('Телефонный номер', max_length=15, default='789123456789')
+    avatar = models.ImageField(null=True, blank=True, default='x.svg')
 
     class Meta:
         verbose_name = 'Клиент'
@@ -99,9 +101,3 @@ class Shedule(models.Model):
 
     def __str__(self):
         return f"{self.start_time} - {self.end_time}"
-
-
-
-
-
-# Create your models here.

@@ -14,7 +14,8 @@ urlpatterns = [
     path('register/', views.RegisterUser.as_view(), name='register'),
     path('logout/', views.LogoutUser.as_view(), name='logout'),
     path('api/appointment/', views.add_appointment, name='add_appointment'),
-    path('api/masters/', views.fetch_masters, name='fetch_masters')
+    path('api/masters/', views.fetch_masters, name='fetch_masters'),
+    path('profile/', views.update_profile, name='update_profile'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 

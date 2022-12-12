@@ -6,6 +6,7 @@ from django.core import serializers
 from django.shortcuts import render, HttpResponse
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
+from django.http import HttpResponseRedirect
 
 from .models import Salon, ServiceCategory, Service, Employee, Shedule, Appointment, Client
 from datetime import datetime, date, time, timedelta
@@ -47,7 +48,14 @@ def service(request):
 
 
 def account(request):
-    return render(request, 'notes.html', context={})
+    current_client = Client.objects.filter(user_id=request.user.id).first()
+    context = {
+        "first_name": current_client.first_name,
+        "last_name": current_client.last_name,
+        "date_of_birth": current_client.date_of_birth,
+        "phone_number": current_client.phone_number,
+    }
+    return render(request, 'notes.html', context=context)
 
 
 def service_finally(request):
@@ -110,6 +118,11 @@ def authorization(request):
 
 def register(request):
     return render(request, 'register.html', context={})
+
+
+def update_profile(request):
+    print(request.POST)
+    return HttpResponseRedirect("/account/")
 
 
 class RegisterUser(CreateView):

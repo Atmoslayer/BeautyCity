@@ -464,3 +464,7 @@ $(document).on('click', '.time__btns_next', function(e) {
 		}
 	});
 })
+$(document).on('click', '#profile_change', function(e) {
+	e.preventDefault()
+    $('#profileModal').arcticmodal();
+});
