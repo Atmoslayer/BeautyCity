@@ -15,7 +15,9 @@
 						<div class="col-md-2">
 							<div class="accaunt__left">
 								<div class="accaunt__ava fic">
-									<img src="{% static 'img/avatars/1.svg' %}" alt="avatar" class="accaunt__ava_img">
+									<span class="circle-image">
+										<img class="accaunt__ava_img" src="{{ avatar.url }}" alt="avatar">
+									</span>
 									<span class="accaunt__ava_name">{{ first_name }}</span>
 								</div>
 								<div class="accaunt__settings fic">
@@ -322,18 +324,18 @@
 				<form class="reviewPopup__form" method="post" action="{% url 'update_profile' %}" enctype="multipart/form-data">
 					{% csrf_token %}
 					<div>
-						<img src="{% static '/img/acc.svg' %}" alt="" width="100" height="100" class="rounded-pill">
+						<img src="{{ avatar.url }}" alt="" width="100" height="100" class="rounded-pill">
 						<label for="id_avatar">
 						<span class="header__block_btn" style="font-size: 32px;">+
-							<input type="file" class="paymentPopup__form_input popup__input" name="avatar" accept=".jpg, .jpeg, .png" required id="id_avatar" hidden>
+							<input type="file" class="paymentPopup__form_input popup__input" name="avatar" accept=".jpg, .jpeg, .png" id="id_avatar" hidden>
 						</span>
 						</label>
 					</div>
 					<input type="text" name="fname" value="{{ first_name }}" class="paymentPopup__form_input popup__input" placeholder="Введите Имя" required="">
-					<input type="text" name="lname" value="{{ last_name }}"" class="paymentPopup__form_input popup__input" placeholder="Введите Фамилию" required="">
-					<input type="text" name="dateBirth" value="{{ date_birth }}"" class="paymentPopup__form_input popup__input" placeholder="Дата рождения" required="">
+					<input type="text" name="lname" value="{{ last_name }}" class="paymentPopup__form_input popup__input" placeholder="Введите Фамилию">
+					<input type="text" name="dateBirth" value="{{ date_birth }}" class="paymentPopup__form_input popup__input" placeholder="Дата рождения">
 					<div class="contacts__form_inputBlock">
-						<input type="text" name="tel" value="{{ phone_number }}"" class="contacts__form_iunput" placeholder="+7(999)999--99-99" required="">
+						<input type="text" name="tel" value="{{ phone_number }}" class="contacts__form_iunput" placeholder="+7(999)999--99-99">
 					</div>
 					<button class="tipsPopup__btn popup__btn">Сохранить данные</button>
 				</form>

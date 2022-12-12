@@ -13,6 +13,7 @@ from datetime import datetime, date, time, timedelta
 from rest_framework.decorators import api_view
 from rest_framework import status
 from .forms import AuthUserForm, RegisterUserForm
+from django.core.files.storage import FileSystemStorage
 
 
 def index(request):
@@ -53,8 +54,9 @@ def account(request):
     context = {
         "first_name": current_client.first_name,
         "last_name": current_client.last_name,
-        "date_of_birth": current_client.date_of_birth,
+        "date_birth": current_client.date_of_birth.strftime('%d.%m.%Y'),
         "phone_number": current_client.phone_number,
+        'avatar': current_client.avatar,
     }
     return render(request, 'notes.html', context=context)
 
@@ -122,8 +124,25 @@ def register(request):
 
 
 def update_profile(request):
-    print(request.POST)
-    return HttpResponseRedirect("/account/")
+    try:
+        current_client = Client.objects.filter(user_id=request.user.id).first()
+        if request.FILES.get('avatar'):
+            file = request.FILES['avatar']
+            fs = FileSystemStorage()
+            filename = fs.save(file.name, file)
+            print(filename)
+            current_client.avatar = filename
+        current_client.first_name = request.POST['fname']
+        if request.POST.get('lname'):
+            current_client.last_name = request.POST['lname']
+        if request.POST.get('dateBirth'):
+            current_client.date_of_birth = datetime.strptime(request.POST['dateBirth'], "%d.%m.%Y")
+        if request.POST.get('phone_number'):
+            current_client.phone_number = request.POST['phone_number']
+        current_client.save()
+        return HttpResponseRedirect("/account/")
+    except:
+        return HttpResponse('Что-то пошло не так', status=status.HTTP_204_NO_CONTENT)
 
 
 class RegisterUser(CreateView):
