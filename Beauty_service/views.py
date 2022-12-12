@@ -54,14 +54,57 @@ def service(request):
 
 def account(request):
     current_client = Client.objects.filter(user_id=request.user.id).first()
-    print(current_client.first_name)
-    context = {
+
+    upcoming_appointments = []
+    past_appointments = []
+    price = 0
+    client_appointments = current_client.appointments.all()
+
+    for client_appointment in client_appointments:
+        employee = client_appointment.employee
+        service = client_appointment.service
+        service_category = employee.service_category
+        salon = employee.salon
+
+        time_now = datetime.now()
+        appointment_date_time = client_appointment.date_time
+        appointment_visit_time = client_appointment.visit_time
+        visit_time = datetime.combine(appointment_date_time, appointment_visit_time)
+
+        price += service.price
+
+        appointment_data = {
+            'id': client_appointment.id,
+            'date_time': appointment_date_time,
+            'visit_time': appointment_visit_time,
+            'employee_first_name':  employee.first_name,
+            'employee_last_name': employee.last_name,
+            'category': service_category.title,
+            'address': salon.address,
+            'service_type': service.title,
+            'price': service.price
+        }
+
+        if time_now >= visit_time:
+            past_appointments.append(appointment_data)
+        else:
+            upcoming_appointments.append(appointment_data)
+
+
+
+    client_data = {
         "first_name": current_client.first_name,
         "last_name": current_client.last_name,
         "date_of_birth": current_client.date_of_birth,
         "phone_number": current_client.phone_number,
+        "past_appointments":  past_appointments,
+        "upcoming_appointments": upcoming_appointments,
+        "price": price
     }
-    return render(request, 'notes.html', context=context)
+
+    print(client_data["price"])
+
+    return render(request, 'notes.html', context=client_data)
 
 
 def service_finally(request):

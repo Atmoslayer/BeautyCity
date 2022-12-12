@@ -79,13 +79,13 @@
 
 								<div class="notes__pay_block">
 									<div class="notes__pay_intro">Сумма оплаты</div>
-									<div class="notes__pay_sum">{{client_data.price}} руб</div>
+									<div class="notes__pay_sum">{{ price }} руб</div>
 									<button class="notes__pay_btn">Оплатить онлайн</button>
 								</div>
 							</div>
 							<div class="notes__content notes__content_upcoming">
 								<div class="notes__main_title">ПРЕДСТОЯЩИЕ</div>
-								{% for client_appointment in client_data.upcoming_appointments %}
+								{% for client_appointment in upcoming_appointments %}
 									<div class="notes__main_block">
 										<img src="{% static 'img/services/service3.svg' %}" alt="service1" class="notes__main_block__img">
 										<div class="notes__main_block__elems">
