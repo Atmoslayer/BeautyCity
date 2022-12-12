@@ -16,6 +16,7 @@ urlpatterns = [
     path('api/appointment/', views.add_appointment, name='add_appointment'),
     path('api/masters/', views.fetch_masters, name='fetch_masters'),
     path('profile/', views.update_profile, name='update_profile'),
+    path('api/payment/', views.create_payment, name='payment'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 
