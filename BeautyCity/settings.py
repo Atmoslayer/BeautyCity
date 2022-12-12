@@ -142,4 +142,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CSRF_TRUSTED_ORIGINS = ['https://bs.shockland.ru', 'https://127.0.0.1', 'https://localhost']
-
+PAYMENT_KEY = env('YOO_KASSA_KEY')
+PAYMENT_ID = env('YOO_KASSA_ID')

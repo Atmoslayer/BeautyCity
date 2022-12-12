@@ -7,12 +7,17 @@ from django.shortcuts import render, HttpResponse
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
 from django.http import HttpResponseRedirect
-
 from .models import Salon, ServiceCategory, Service, Employee, Shedule, Appointment, Client
 from datetime import datetime, date, time, timedelta
 from rest_framework.decorators import api_view
 from rest_framework import status
 from .forms import AuthUserForm, RegisterUserForm
+import uuid
+from yookassa import Configuration, Payment
+from django.shortcuts import redirect
+from django.conf import settings
+
+
 from django.core.files.storage import FileSystemStorage
 
 
@@ -181,3 +186,25 @@ class LoginUser(LoginView):
 
 class LogoutUser(LogoutView):
     next_page = reverse_lazy('authorization')
+
+
+@api_view(['GET', 'POST'])
+def create_payment(request):
+    Configuration.account_id = settings.PAYMENT_ID
+    Configuration.secret_key = settings.PAYMENT_KEY
+    appointment = Appointment.objects.filter(client__user_id=request.user.id).first()
+    domain = "http://127.0.0.1:8000"
+    payment = Payment.create({
+        "amount": {
+            "value": appointment.service.price,
+            "currency": "RUB"
+        },
+        "confirmation": {
+            "type": "redirect",
+            "return_url": domain
+        },
+        "capture": True,
+        "description": f"Услуга - {appointment.service};  Клиент - {appointment.client}"
+
+    }, uuid.uuid4())
+    return redirect(payment.confirmation.confirmation_url)
