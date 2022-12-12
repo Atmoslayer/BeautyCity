@@ -16,7 +16,7 @@
 							<div class="accaunt__left">
 								<div class="accaunt__ava fic">
 									<img src="{% static 'img/avatars/1.svg' %}" alt="avatar" class="accaunt__ava_img">
-									<span class="accaunt__ava_name">Алиса И.</span>
+									<span class="accaunt__ava_name">{{ first_name }}</span>
 								</div>
 								<div class="accaunt__settings fic">
 									<a href="#" class="accaunt__settings_intro" id="profile_change">Изменить профиль</a>
@@ -333,11 +333,11 @@
 						</span>
 						</label>
 					</div>
-					<input type="text" name="fname" value="Саша" class="paymentPopup__form_input popup__input" placeholder="Введите Имя" required="">
-					<input type="text" name="lname" value="Пряников" class="paymentPopup__form_input popup__input" placeholder="Введите Фамилию" required="">
-					<input type="text" name="dateBirth" value="24.03.1985" class="paymentPopup__form_input popup__input" placeholder="Дата рождения" required="">
+					<input type="text" name="fname" value="{{ first_name }}" class="paymentPopup__form_input popup__input" placeholder="Введите Имя" required="">
+					<input type="text" name="lname" value="{{ last_name }}"" class="paymentPopup__form_input popup__input" placeholder="Введите Фамилию" required="">
+					<input type="text" name="dateBirth" value="{{ date_birth }}"" class="paymentPopup__form_input popup__input" placeholder="Дата рождения" required="">
 					<div class="contacts__form_inputBlock">
-						<input type="text" name="tel" value="322-223" class="contacts__form_iunput" placeholder="+7(999)999--99-99" required="">
+						<input type="text" name="tel" value="{{ phone_number }}"" class="contacts__form_iunput" placeholder="+7(999)999--99-99" required="">
 					</div>
 					<button class="tipsPopup__btn popup__btn">Сохранить данные</button>
 				</form>
