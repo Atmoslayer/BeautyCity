@@ -49,6 +49,7 @@ def service(request):
 
 def account(request):
     current_client = Client.objects.filter(user_id=request.user.id).first()
+    print(current_client.first_name)
     context = {
         "first_name": current_client.first_name,
         "last_name": current_client.last_name,
