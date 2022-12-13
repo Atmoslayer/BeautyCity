@@ -172,6 +172,7 @@ def register(request):
 
 
 def update_profile(request):
+    # Здесь жесть и все надо переделать с валидацией, но не хватило времени
     try:
         current_client = Client.objects.filter(user_id=request.user.id).first()
         if request.FILES.get('avatar'):
